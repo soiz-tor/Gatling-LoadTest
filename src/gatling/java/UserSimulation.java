@@ -1,7 +1,3 @@
-import java.time.Duration;
-
-import io.gatling.app.Gatling;
-import io.gatling.core.config.GatlingPropertiesBuilder;
 import io.gatling.javaapi.core.*;
 import static io.gatling.javaapi.core.CoreDsl.*;
 import io.gatling.javaapi.http.*;
@@ -27,9 +23,4 @@ public class UserSimulation extends Simulation{
         setUp(scn.injectOpen(atOnceUsers(10)).protocols(httpProtocol).andThen(scn2.injectOpen(rampUsersPerSec(1).to(10).during(60)).protocols(httpProtocol)));
     }
 
-    public static void main(String[] args) {
-        GatlingPropertiesBuilder props = new GatlingPropertiesBuilder()
-                .simulationClass(UserSimulation.class.getName());
-        Gatling.fromMap(props.build());
-    }
 }
